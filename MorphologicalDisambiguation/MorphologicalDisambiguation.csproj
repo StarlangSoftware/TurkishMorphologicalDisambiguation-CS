@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>NlpToolkit-MorphologicalDisambiguation</PackageId>
+        <Authors>olcaytaner</Authors>
+        <PackageVersion>1.0.1</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NlpToolkit-Classification" Version="1.0.0" />
+      <PackageReference Include="NlpToolkit-MorphologicalAnalysis" Version="1.0.3" />
+      <PackageReference Include="NlpToolkit-NGram" Version="1.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="penntreebank_statistics.txt" />
+      <EmbeddedResource Include="penntreebank_statistics.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>
