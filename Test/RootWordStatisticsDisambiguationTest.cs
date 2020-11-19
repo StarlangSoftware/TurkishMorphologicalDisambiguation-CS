@@ -4,14 +4,14 @@ using NUnit.Framework;
 
 namespace Test
 {
-    public class RootFirstDisambiguationTest
+    public class RootWordStatisticsDisambiguationTest
     {
         [Test]
         public void TestDisambiguation()
         {
             var fsm = new FsmMorphologicalAnalyzer();
             var corpus = new DisambiguationCorpus("../../../penntreebank.txt");
-            var algorithm = new RootFirstDisambiguation();
+            var algorithm = new RootWordStatisticsDisambiguation();
             algorithm.Train(corpus);
             var correctParse = 0;
             var correctRoot = 0;
@@ -34,8 +34,8 @@ namespace Test
                 }
             }
 
-            Assert.AreEqual(0.948, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.01);
-            Assert.AreEqual(0.86, (correctParse + 0.0) / corpus.NumberOfWords(), 0.01);
+            Assert.AreEqual(0.960, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.001);
+            Assert.AreEqual(0.790, (correctParse + 0.0) / corpus.NumberOfWords(), 0.001);
         }
     }
 }

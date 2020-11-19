@@ -11,16 +11,16 @@ namespace Test
         {
             var fsm = new FsmMorphologicalAnalyzer();
             var rootWordStatistics = new RootWordStatistics("penntreebank_statistics.txt");
-            Assert.True(rootWordStatistics.ContainsKey("it$iti$itici"));
-            Assert.True(rootWordStatistics.ContainsKey("yas$yasa$yasama"));
-            Assert.True(rootWordStatistics.ContainsKey("tutuk$tutukla"));
-            Assert.AreEqual("çık", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("çıkma"), 0.0));
-            Assert.AreEqual("danışman", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("danışman"), 0.0));
-            Assert.Null(rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("danışman"), 0.7));
-            Assert.AreEqual("görüşme", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("görüşme"), 0.0));
-            Assert.Null(rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("görüşme"), 0.7));
-            Assert.AreEqual("anlaş", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("anlaşma"), 0.0));
-            Assert.Null(rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("anlaşma"), 0.7));
+            Assert.True(rootWordStatistics.ContainsKey("yasasını"));
+            Assert.True(rootWordStatistics.ContainsKey("yapılandırıyorlar"));
+            Assert.True(rootWordStatistics.ContainsKey("çöküşten"));
+            Assert.AreEqual("yasa", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("yasasını"), 0.0));
+            Assert.AreEqual("karşılaş", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("karşılaşabilir"), 0.0));
+            Assert.Null(rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("karşılaşabilir"), 0.7));
+            Assert.AreEqual("anlat", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("anlattı"), 0.0));
+            Assert.Null(rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("anlattı"), 0.9));
+            Assert.AreEqual("ver", rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("vermesini"), 0.0));
+            Assert.Null(rootWordStatistics.BestRootWord(fsm.MorphologicalAnalysis("vermesini"), 0.9));
         }
     }
 }

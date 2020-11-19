@@ -106,11 +106,13 @@ namespace MorphologicalDisambiguation
         {
             var streamWriter = new StreamWriter(fileName);
             streamWriter.WriteLine(statistics.Count);
-            foreach (var rootWord in statistics.Keys){
+            foreach (var rootWord in statistics.Keys)
+            {
                 var map = statistics[rootWord];
-                streamWriter.WriteLine(rootWord + " " + ((Dictionary<string, int>)map).Count);
+                streamWriter.WriteLine(rootWord + " " + ((Dictionary<string, int>) map).Count);
                 streamWriter.Write(map.ToString());
             }
+
             streamWriter.Close();
         }
 
@@ -124,11 +126,18 @@ namespace MorphologicalDisambiguation
          */
         public string BestRootWord(FsmParseList parseList, double threshold)
         {
-            var rootWords = parseList.RootWords();
-            if (statistics.ContainsKey(rootWords))
+            var surfaceForm = parseList.GetFsmParse(0).GetSurfaceForm();
+            if (statistics.ContainsKey(surfaceForm))
             {
-                var rootWordStatistics = statistics[rootWords];
-                return rootWordStatistics.Max(threshold);
+                var rootWordStatistics = statistics[surfaceForm];
+                var rootWord = rootWordStatistics.Max(threshold);
+                for (var i = 0; i < parseList.Size(); i++)
+                {
+                    if (parseList.GetFsmParse(i).GetWord().GetName().Equals(rootWord))
+                    {
+                        return rootWord;
+                    }
+                }
             }
 
             return null;
