@@ -1,3 +1,4 @@
+using System.Globalization;
 using MorphologicalAnalysis;
 using MorphologicalDisambiguation;
 using NUnit.Framework;
@@ -22,20 +23,24 @@ namespace Test
                 for (var j = 0; j < corpus.GetSentence(i).WordCount(); j++)
                 {
                     var word = (DisambiguatedWord) corpus.GetSentence(i).GetWord(j);
-                    if (fsmParses[j].TransitionList().Equals(word.GetParse().ToString()))
+                    if (fsmParses[j].TransitionList().ToLower(new CultureInfo("tr-TR"))
+                        .Equals(word.GetParse().ToString().ToLower(new CultureInfo("tr-TR"))))
                     {
                         correctParse++;
-                    }
-
-                    if (fsmParses[j].GetWord().Equals(word.GetParse().GetWord()))
-                    {
                         correctRoot++;
+                    }
+                    else
+                    {
+                        if (fsmParses[j].GetWord().Equals(word.GetParse().GetWord()))
+                        {
+                            correctRoot++;
+                        }
                     }
                 }
             }
 
-            Assert.AreEqual(0.94, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.01);
-            Assert.AreEqual(0.87, (correctParse + 0.0) / corpus.NumberOfWords(), 0.01);
+            Assert.AreEqual(0.9389, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.0001);
+            Assert.AreEqual(0.8719, (correctParse + 0.0) / corpus.NumberOfWords(), 0.0001);
         }
     }
 }
