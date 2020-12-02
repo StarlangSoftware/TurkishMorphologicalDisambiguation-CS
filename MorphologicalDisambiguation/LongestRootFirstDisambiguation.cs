@@ -25,16 +25,18 @@ namespace MorphologicalDisambiguation
         public List<FsmParse> Disambiguate(FsmParseList[] fsmParses)
         {
             var correctFsmParses = new List<FsmParse>();
+            int i = 0;
             foreach (var fsmParseList in fsmParses)
             {
                 var bestParse = fsmParseList.GetParseWithLongestRootWord();
                 fsmParseList.ReduceToParsesWithSameRootAndPos(bestParse.GetWordWithPos());
-                var newBestParse = fsmParseList.CaseDisambiguator();
+                var newBestParse = AutoDisambiguation.CaseDisambiguator(i, fsmParses, correctFsmParses);
                 if (newBestParse != null)
                 {
                     bestParse = newBestParse;
                 }
                 correctFsmParses.Add(bestParse);
+                i++;
             }
             return correctFsmParses;
         }

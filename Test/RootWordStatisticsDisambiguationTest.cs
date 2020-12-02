@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using MorphologicalAnalysis;
 using MorphologicalDisambiguation;
@@ -39,8 +40,8 @@ namespace Test
                 }
             }
 
-            Assert.AreEqual(0.9676, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.0001);
-            Assert.AreEqual(0.8035, (correctParse + 0.0) / corpus.NumberOfWords(), 0.0001);
+            Assert.AreEqual(0.9711, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.0001);
+            Assert.AreEqual(0.8613, (correctParse + 0.0) / corpus.NumberOfWords(), 0.0001);
         }
     }
 }

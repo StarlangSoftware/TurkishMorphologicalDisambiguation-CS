@@ -19,15 +19,30 @@ namespace MorphologicalDisambiguation
 
         public List<FsmParse> Disambiguate(FsmParseList[] fsmParses)
         {
+            FsmParse bestParse;
+            string bestRoot;
             var correctFsmParses = new List<FsmParse>();
+            int i = 0;
             foreach (var fsmParseList in fsmParses)
             {
-                var bestRoot = rootWordStatistics.BestRootWord(fsmParseList, 0.0);
-                FsmParse bestParse;
+                string rootWords = fsmParseList.RootWords();
+                if (rootWords.Contains("$"))
+                {
+                    bestRoot = rootWordStatistics.BestRootWord(fsmParseList, 0.0);
+                    if (bestRoot == null)
+                    {
+                        bestRoot = fsmParseList.GetParseWithLongestRootWord().GetWord().GetName();
+                    }
+                }
+                else
+                {
+                    bestRoot = rootWords;
+                }
+
                 if (bestRoot != null)
                 {
                     fsmParseList.ReduceToParsesWithSameRoot(bestRoot);
-                    var newBestParse = fsmParseList.CaseDisambiguator();
+                    FsmParse newBestParse = AutoDisambiguation.CaseDisambiguator(i, fsmParses, correctFsmParses);
                     if (newBestParse != null)
                     {
                         bestParse = newBestParse;
@@ -43,6 +58,7 @@ namespace MorphologicalDisambiguation
                 }
 
                 correctFsmParses.Add(bestParse);
+                i++;
             }
 
             return correctFsmParses;
