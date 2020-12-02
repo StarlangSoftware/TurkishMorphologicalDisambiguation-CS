@@ -214,7 +214,7 @@ namespace MorphologicalDisambiguation
 
                     return "PRON+DEMONSP+A3SG+PNON+NOM";
                 /* gelebilir */
-                case "AOR+A3SG$AOR^DB+ADJ+ZERO":
+                case "AOR^DB+ADJ+ZERO$AOR+A3SG":
                     if (IsBeforeLastWord(index, fsmParses))
                     {
                         return "AOR+A3SG";
@@ -260,7 +260,7 @@ namespace MorphologicalDisambiguation
                 case "CONJ$POSTP+PCNOM":
                     return "POSTP+PCNOM";
                 /* gelecek */
-                case "POS+FUT+A3SG$POS^DB+ADJ+FUTPART+PNON":
+                case "POS^DB+ADJ+FUTPART+PNON$POS+FUT+A3SG":
                     if (IsBeforeLastWord(index, fsmParses))
                     {
                         return "POS+FUT+A3SG";
@@ -276,10 +276,10 @@ namespace MorphologicalDisambiguation
 
                     return "NOUN+A3SG+PNON+NOM^DB";
                 /* yaptık, şüphelendik */
-                case "POS+PAST+A1PL$POS^DB+ADJ+PASTPART+PNON$POS^DB+NOUN+PASTPART+A3SG+PNON+NOM":
+                case "POS^DB+ADJ+PASTPART+PNON$POS^DB+NOUN+PASTPART+A3SG+PNON+NOM$POS+PAST+A1PL":
                     return "POS+PAST+A1PL";
                 /* ederim, yaparım */
-                case "AOR+A1SG$AOR^DB+ADJ+ZERO^DB+NOUN+ZERO+A3SG+P1SG+NOM":
+                case "AOR^DB+ADJ+ZERO^DB+NOUN+ZERO+A3SG+P1SG+NOM$AOR+A1SG":
                     return "AOR+A1SG";
                 /* geçti, vardı, aldı */
                 case "ADJ^DB+VERB+ZERO$VERB+POS":
@@ -308,7 +308,7 @@ namespace MorphologicalDisambiguation
                     }
 
                     return "ADV";
-                case "NARR+A3SG$NARR^DB+ADJ+ZERO":
+                case "NARR^DB+ADJ+ZERO$NARR+A3SG":
                     if (IsBeforeLastWord(index, fsmParses))
                     {
                         return "NARR+A3SG";
@@ -391,7 +391,7 @@ namespace MorphologicalDisambiguation
 
                     return "P1SG+NOM";
                 /* görülmektedir */
-                case "POS+PROG2$POS^DB+NOUN+INF+A3SG+PNON+LOC^DB+VERB+ZERO+PRES":
+                case "POS^DB+NOUN+INF+A3SG+PNON+LOC^DB+VERB+ZERO+PRES$POS+PROG2":
                     return "POS+PROG2";
                 /* NE */
                 case "ADJ$ADV$CONJ$PRON+QUESP+A3SG+PNON+NOM":
@@ -428,7 +428,7 @@ namespace MorphologicalDisambiguation
 
                     return "ADV";
                 /* görülmedik */
-                case "NEG+PAST+A1PL$NEG^DB+ADJ+PASTPART+PNON$NEG^DB+NOUN+PASTPART+A3SG+PNON+NOM":
+                case "NEG^DB+ADJ+PASTPART+PNON$NEG^DB+NOUN+PASTPART+A3SG+PNON+NOM$NEG+PAST+A1PL":
                     if (surfaceForm.Equals("alışılmadık"))
                     {
                         return "NEG^DB+ADJ+PASTPART+PNON";
@@ -550,7 +550,7 @@ namespace MorphologicalDisambiguation
                 case "NOUN+ZERO+A3SG+P1SG+NOM$VERB+ZERO+PRES+A1SG":
                     return "VERB+ZERO+PRES+A1SG";
                 /* yaparlar, olabilirler, değiştirirler */
-                case "AOR+A3PL$AOR^DB+ADJ+ZERO^DB+NOUN+ZERO+A3PL+PNON+NOM":
+                case "AOR^DB+ADJ+ZERO^DB+NOUN+ZERO+A3PL+PNON+NOM$AOR+A3PL":
                     return "AOR+A3PL";
                 /* san, yasa */
                 case "NOUN+A3SG+PNON+NOM$NOUN+PROP+A3SG+PNON+NOM$VERB+POS+IMP+A2SG":
@@ -561,10 +561,10 @@ namespace MorphologicalDisambiguation
 
                     break;
                 /* etmeyecek, yapmayacak, koşmayacak */
-                case "NEG+FUT+A3SG$NEG^DB+ADJ+FUTPART+PNON":
+                case "NEG^DB+ADJ+FUTPART+PNON$NEG+FUT+A3SG":
                     return "NEG+FUT+A3SG";
                 /* etmeli, olmalı */
-                case "POS+NECES+A3SG$POS^DB+NOUN+INF2+A3SG+PNON+NOM^DB+ADJ+WITH":
+                case "POS^DB+NOUN+INF2+A3SG+PNON+NOM^DB+ADJ+WITH$POS+NECES+A3SG":
                     if (IsBeforeLastWord(index, fsmParses))
                     {
                         return "POS+NECES+A3SG";
@@ -647,7 +647,7 @@ namespace MorphologicalDisambiguation
 
                     return "NOUN+PASTPART+A3PL+P3SG+NOM";
                 /* yılın, yolun */
-                case "NOUN+A3SG+P2SG+NOM$NOUN+A3SG+PNON+GEN$VERB+POS+IMP+A2PL$VERB^DB+VERB+PASS+POS+IMP+A2SG":
+                case "NOUN+A3SG+P2SG+NOM$NOUN+A3SG+PNON+GEN$VERB^DB+VERB+PASS+POS+IMP+A2SG$VERB+POS+IMP+A2PL":
                     if (IsAnyWordSecondPerson(index, correctParses))
                     {
                         return "NOUN+A3SG+P2SG+NOM";
@@ -655,7 +655,7 @@ namespace MorphologicalDisambiguation
 
                     return "NOUN+A3SG+PNON+GEN";
                 /* sürmekte, beklenmekte, değişmekte */
-                case "POS+PROG2+A3SG$POS^DB+NOUN+INF+A3SG+PNON+LOC":
+                case "POS^DB+NOUN+INF+A3SG+PNON+LOC$POS+PROG2+A3SG":
                     return "POS+PROG2+A3SG";
                 /* KİMSE, KİMSEDE, KİMSEYE */
                 case "NOUN+A3SG+PNON$PRON+QUANTP+A3SG+P3SG":
@@ -698,7 +698,7 @@ namespace MorphologicalDisambiguation
                         return "PRON+PERS+A3SG+PNON+NOM";
                     }
                 /* yapmalıyız, etmeliyiz, alınmalıdır */
-                case "POS+NECES$POS^DB+NOUN+INF2+A3SG+PNON+NOM^DB+ADJ+WITH^DB+VERB+ZERO+PRES":
+                case "POS^DB+NOUN+INF2+A3SG+PNON+NOM^DB+ADJ+WITH^DB+VERB+ZERO+PRES$POS+NECES":
                     return "POS+NECES";
                 /* kızdı, çekti, bozdu */
                 case "ADJ^DB+VERB+ZERO$NOUN+A3SG+PNON+NOM^DB+VERB+ZERO$VERB+POS":
@@ -720,11 +720,11 @@ namespace MorphologicalDisambiguation
                 /* SUN */
                 case "NOUN+PROP+A3SG+PNON+NOM$VERB+POS+IMP+A2SG":
                     return "NOUN+PROP+A3SG+PNON+NOM";
-                case "ADJ+JUSTLIKE$NOUN+ZERO+A3SG+P3SG+NOM$NOUN+ZERO^DB+ADJ+ALMOST":
+                case "ADJ+JUSTLIKE$NOUN+ZERO^DB+ADJ+ALMOST$NOUN+ZERO+A3SG+P3SG+NOM":
                     return "NOUN+ZERO+A3SG+P3SG+NOM";
                 /* düşündük, ettik, kazandık */
                 case
-                    "NOUN+A3SG+PNON+NOM^DB+VERB+ZERO+PAST+A1PL$VERB+POS+PAST+A1PL$VERB+POS^DB+ADJ+PASTPART+PNON$VERB+POS^DB+NOUN+PASTPART+A3SG+PNON+NOM"
+                    "NOUN+A3SG+PNON+NOM^DB+VERB+ZERO+PAST+A1PL$VERB+POS^DB+ADJ+PASTPART+PNON$VERB+POS^DB+NOUN+PASTPART+A3SG+PNON+NOM$VERB+POS+PAST+A1PL"
                     :
                     return "VERB+POS+PAST+A1PL";
                 /* komiktir, eksiktir, mevcuttur, yoktur */
@@ -733,7 +733,7 @@ namespace MorphologicalDisambiguation
                     :
                     return "ADJ^DB+VERB+ZERO+PRES+COP+A3SG";
                 /* edeceğim, ekeceğim, koşacağım, gideceğim, savaşacağım, olacağım  */
-                case "POS+FUT+A1SG$POS^DB+ADJ+FUTPART+P1SG$POS^DB+NOUN+FUTPART+A3SG+P1SG+NOM":
+                case "POS^DB+ADJ+FUTPART+P1SG$POS^DB+NOUN+FUTPART+A3SG+P1SG+NOM$POS+FUT+A1SG":
                     return "POS+FUT+A1SG";
                 /* A */
                 case "ADJ$INTERJ$NOUN+PROP+A3SG+PNON+NOM":
@@ -754,7 +754,7 @@ namespace MorphologicalDisambiguation
                 /* TABİ */
                 case "ADJ$INTERJ":
                     return "ADJ";
-                case "AOR+A2PL$AOR^DB+ADJ+ZERO^DB+ADJ+JUSTLIKE^DB+NOUN+ZERO+A3SG+P2PL+NOM":
+                case "AOR^DB+ADJ+ZERO^DB+ADJ+JUSTLIKE^DB+NOUN+ZERO+A3SG+P2PL+NOM$AOR+A2PL":
                     return "AOR+A2PL";
                 /* ayın, düşünün*/
                 case "NOUN+A3SG+P2SG+NOM$NOUN+A3SG+PNON+GEN$VERB+POS+IMP+A2PL":
@@ -765,13 +765,13 @@ namespace MorphologicalDisambiguation
 
                     return "NOUN+A3SG+PNON+GEN";
                 /* ödeyecekler, olacaklar */
-                case "POS+FUT+A3PL$POS^DB+NOUN+FUTPART+A3PL+PNON+NOM":
+                case "POS^DB+NOUN+FUTPART+A3PL+PNON+NOM$POS+FUT+A3PL":
                     return "POS+FUT+A3PL";
                 /* 9:30'daki */
                 case "P3SG$PNON":
                     return "PNON";
                 /* olabilecek, yapabilecek */
-                case "ABLE+FUT+A3SG$ABLE^DB+ADJ+FUTPART+PNON":
+                case "ABLE^DB+ADJ+FUTPART+PNON$ABLE+FUT+A3SG":
                     if (IsNextWordNounOrAdjective(index, fsmParses))
                     {
                         return "ABLE^DB+ADJ+FUTPART+PNON";
@@ -779,7 +779,7 @@ namespace MorphologicalDisambiguation
 
                     return "ABLE+FUT+A3SG";
                 /* düşmüş duymuş artmış */
-                case "NOUN+A3SG+PNON+NOM^DB+VERB+ZERO+NARR+A3SG$VERB+POS+NARR+A3SG$VERB+POS+NARR^DB+ADJ+ZERO":
+                case "NOUN+A3SG+PNON+NOM^DB+VERB+ZERO+NARR+A3SG$VERB+POS+NARR^DB+ADJ+ZERO$VERB+POS+NARR+A3SG":
                     if (IsBeforeLastWord(index, fsmParses))
                     {
                         return "VERB+POS+NARR+A3SG";
@@ -798,7 +798,7 @@ namespace MorphologicalDisambiguation
                 case "A3SG+PNON+ACC$PROP+A3SG+PNON+NOM":
                     return "A3SG+PNON+ACC";
                 /* değinmeyeceğim, vermeyeceğim */
-                case "NEG+FUT+A1SG$NEG^DB+ADJ+FUTPART+P1SG$NEG^DB+NOUN+FUTPART+A3SG+P1SG+NOM":
+                case "NEG^DB+ADJ+FUTPART+P1SG$NEG^DB+NOUN+FUTPART+A3SG+P1SG+NOM$NEG+FUT+A1SG":
                     return "NEG+FUT+A1SG";
                 /* görünüşe, satışa, duruşa */
                 case "POS^DB+NOUN+INF3+A3SG+PNON+DAT$RECIP+POS+OPT+A3SG":
@@ -819,7 +819,7 @@ namespace MorphologicalDisambiguation
                 case "NOUN+A3SG+P3SG+NOM$NOUN+A3SG+PNON+ACC$PRON+PERS+A1SG+PNON+ACC":
                     return "PRON+PERS+A1SG+PNON+ACC";
                 /* edemezsin, kanıtlarsın, yapamazsın */
-                case "AOR+A2SG$AOR^DB+ADJ+ZERO^DB+ADJ+JUSTLIKE^DB+NOUN+ZERO+A3SG+P2SG+NOM":
+                case "AOR^DB+ADJ+ZERO^DB+ADJ+JUSTLIKE^DB+NOUN+ZERO+A3SG+P2SG+NOM$AOR+A2SG":
                     return "AOR+A2SG";
                 /* BÜYÜME, ATAMA, KARIMA, KORUMA, TANIMA, ÜREME */
                 case "NOUN+A3SG+P1SG+DAT$VERB+NEG+IMP+A2SG$VERB+POS^DB+NOUN+INF2+A3SG+PNON+NOM":
@@ -844,7 +844,7 @@ namespace MorphologicalDisambiguation
                 case "NOUN+A3SG+P2SG+GEN$NOUN+A3SG+P3SG+GEN$VERB^DB+VERB+PASS+POS+IMP+A2PL":
                     return "NOUN+A3SG+P3SG+GEN";
                 /* ÇIKARDI */
-                case "VERB+POS+AOR$VERB^DB+VERB+CAUS+POS":
+                case "VERB^DB+VERB+CAUS+POS$VERB+POS+AOR":
                     return "VERB+POS+AOR";
                 /* sunucularımız, rakiplerimiz, yayınlarımız */
                 case "P1PL+NOM$P1SG+NOM^DB+VERB+ZERO+PRES+A1PL":
@@ -853,7 +853,7 @@ namespace MorphologicalDisambiguation
                 case "NOUN+A3SG+PNON+NOM^DB+VERB+ZERO+NARR+A3SG+COP$VERB+POS+NARR+COP+A3SG":
                     return "VERB+POS+NARR+COP+A3SG";
                 /* hazırlandı, yuvarlandı, temizlendi */
-                case "VERB+REFLEX$VERB^DB+VERB+PASS":
+                case "VERB^DB+VERB+PASS$VERB+REFLEX":
                     return "VERB^DB+VERB+PASS";
                 /* KARA, ÇEK, SOL, KOCA */
                 case "ADJ$NOUN+A3SG+PNON+NOM$NOUN+PROP+A3SG+PNON+NOM$VERB+POS+IMP+A2SG":
@@ -876,7 +876,7 @@ namespace MorphologicalDisambiguation
                     }
 
                     return "NOUN+A3SG+PNON+NOM";
-                case "ADJ+AGT^DB+ADJ+JUSTLIKE$NOUN+AGT+A3SG+P3SG+NOM$NOUN+AGT^DB+ADJ+ALMOST":
+                case "ADJ+AGT^DB+ADJ+JUSTLIKE$NOUN+AGT^DB+ADJ+ALMOST$NOUN+AGT+A3SG+P3SG+NOM":
                     return "NOUN+AGT+A3SG+P3SG+NOM";
                 /* artışın, düşüşün, yükselişin*/
                 case "POS^DB+NOUN+INF3+A3SG+P2SG+NOM$POS^DB+NOUN+INF3+A3SG+PNON+GEN$RECIP+POS+IMP+A2PL":
@@ -894,7 +894,7 @@ namespace MorphologicalDisambiguation
                     return "POSTP+PCDAT";
                 /* ALDIK */
                 case
-                    "ADJ^DB+VERB+ZERO+PAST+A1PL$VERB+POS+PAST+A1PL$VERB+POS^DB+ADJ+PASTPART+PNON$VERB+POS^DB+NOUN+PASTPART+A3SG+PNON+NOM"
+                    "ADJ^DB+VERB+ZERO+PAST+A1PL$VERB+POS^DB+ADJ+PASTPART+PNON$VERB+POS^DB+NOUN+PASTPART+A3SG+PNON+NOM$VERB+POS+PAST+A1PL"
                     :
                     return "VERB+POS+PAST+A1PL";
                 /* BİRİNİN, BİRİNE, BİRİNİ, BİRİNDEN */
@@ -974,7 +974,7 @@ namespace MorphologicalDisambiguation
                 case "ADJ^DB+VERB+ZERO+PRES+A1SG$NOUN+A3SG+P1SG+NOM$NOUN+A3SG+PNON+NOM^DB+VERB+ZERO+PRES+A1SG":
                     return "NOUN+A3SG+P1SG+NOM";
                 /* etmeliydi, yaratmalıydı */
-                case "POS+NECES$POS^DB+NOUN+INF2+A3SG+PNON+NOM^DB+ADJ+WITH^DB+VERB+ZERO":
+                case "POS^DB+NOUN+INF2+A3SG+PNON+NOM^DB+ADJ+WITH^DB+VERB+ZERO$POS+NECES":
                     return "POS+NECES";
                 /* HERKESİN */
                 case "NOUN+A3SG+P2SG+NOM$NOUN+A3SG+PNON+GEN$PRON+QUANTP+A3PL+P3PL+GEN":
@@ -985,7 +985,7 @@ namespace MorphologicalDisambiguation
                 case "NESS+A3SG+PNON+NOM$ZERO+A3SG+PNON+NOM^DB+ADJ+FITFOR":
                     return "ZERO+A3SG+PNON+NOM^DB+ADJ+FITFOR";
                 /* alınmamaktadır, koymamaktadır */
-                case "NEG+PROG2$NEG^DB+NOUN+INF+A3SG+PNON+LOC^DB+VERB+ZERO+PRES":
+                case "NEG^DB+NOUN+INF+A3SG+PNON+LOC^DB+VERB+ZERO+PRES$NEG+PROG2":
                     return "NEG+PROG2";
                 /* HEPİMİZ */
                 case "A1PL+P1PL+NOM$A3SG+P3SG+GEN^DB+VERB+ZERO+PRES+A1PL":
@@ -994,7 +994,7 @@ namespace MorphologicalDisambiguation
                 case "NOUN+A3SG+P2SG$NOUN+A3SG+PNON$PRON+QUANTP+A3SG+P3SG":
                     return "PRON+QUANTP+A3SG+P3SG";
                 /* GEÇMİŞ, ALMIŞ, VARMIŞ */
-                case "ADJ^DB+VERB+ZERO+NARR+A3SG$VERB+POS+NARR+A3SG$VERB+POS+NARR^DB+ADJ+ZERO":
+                case "ADJ^DB+VERB+ZERO+NARR+A3SG$VERB+POS+NARR^DB+ADJ+ZERO$VERB+POS+NARR+A3SG":
                     if (IsNextWordNounOrAdjective(index, fsmParses))
                     {
                         return "VERB+POS+NARR^DB+ADJ+ZERO";
@@ -1060,12 +1060,12 @@ namespace MorphologicalDisambiguation
 
                     return "P3SG";
                 /* olun, kurtulun, gelin */
-                case "VERB+POS+IMP+A2PL$VERB^DB+VERB+PASS+POS+IMP+A2SG":
+                case "VERB^DB+VERB+PASS+POS+IMP+A2SG$VERB+POS+IMP+A2PL":
                     return "VERB+POS+IMP+A2PL";
                 case "ADJ+JUSTLIKE^DB$NOUN+ZERO+A3SG+P3SG+NOM^DB":
                     return "NOUN+ZERO+A3SG+P3SG+NOM^DB";
                 /* oluşmaktaydı, gerekemekteydi */
-                case "POS+PROG2$POS^DB+NOUN+INF+A3SG+PNON+LOC^DB+VERB+ZERO":
+                case "POS^DB+NOUN+INF+A3SG+PNON+LOC^DB+VERB+ZERO$POS+PROG2":
                     return "POS+PROG2";
                 /* BERABER */
                 case "ADJ$ADV$POSTP+PCINS":
@@ -1128,13 +1128,13 @@ namespace MorphologicalDisambiguation
                     return "POS^DB+NOUN+INF2+A3SG+PNON+NOM";
                 case "NEG+OPT+A3SG$POS^DB+NOUN+INF2+A3SG+PNON+DAT":
                     return "POS^DB+NOUN+INF2+A3SG+PNON+DAT";
-                case "NOUN+A3SG+P3SG+NOM$NOUN^DB+ADJ+ALMOST":
+                case "NOUN^DB+ADJ+ALMOST$NOUN+A3SG+P3SG+NOM":
                     return "NOUN+A3SG+P3SG+NOM";
                 case "ADJ$VERB+POS+IMP+A2SG":
                     return "ADJ";
                 case "NOUN+A3SG+PNON+NOM$VERB+POS+IMP+A2SG":
                     return "NOUN+A3SG+PNON+NOM";
-                case "INF2+A3SG+P3SG+NOM$INF2^DB+ADJ+ALMOST$":
+                case "INF2^DB+ADJ+ALMOST$INF2+A3SG+P3SG+NOM":
                     return "INF2+A3SG+P3SG+NOM";
             }
 
