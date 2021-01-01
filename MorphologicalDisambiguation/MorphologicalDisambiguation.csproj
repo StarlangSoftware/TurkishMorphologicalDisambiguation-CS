@@ -1,16 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>NlpToolkit-MorphologicalDisambiguation</PackageId>
         <Authors>olcaytaner</Authors>
-        <PackageVersion>1.0.4</PackageVersion>
+        <PackageVersion>1.0.5</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="NlpToolkit-AnnotatedSentence" Version="1.0.7" />
+      <PackageReference Include="NlpToolkit-AnnotatedTree" Version="1.0.3" />
       <PackageReference Include="NlpToolkit-Classification" Version="1.0.2" />
-      <PackageReference Include="NlpToolkit-MorphologicalAnalysis" Version="1.0.7" />
+      <PackageReference Include="NlpToolkit-MorphologicalAnalysis" Version="1.0.8" />
       <PackageReference Include="NlpToolkit-NGram" Version="1.0.4" />
     </ItemGroup>
 
