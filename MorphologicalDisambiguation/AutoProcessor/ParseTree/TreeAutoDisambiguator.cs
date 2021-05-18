@@ -10,11 +10,9 @@ namespace MorphologicalDisambiguation.AutoProcessor.ParseTree
         protected abstract bool AutoDisambiguateSingleRootWords(ParseTreeDrawable parseTree);
         protected abstract bool AutoDisambiguateMultipleRootWords(ParseTreeDrawable parseTree);
 
-        protected TreeAutoDisambiguator(FsmMorphologicalAnalyzer morphologicalAnalyzer,
-            RootWordStatistics rootWordStatistics)
+        protected TreeAutoDisambiguator(FsmMorphologicalAnalyzer morphologicalAnalyzer)
         {
             this.morphologicalAnalyzer = morphologicalAnalyzer;
-            this.rootWordStatistics = rootWordStatistics;
         }
 
         public void AutoDisambiguate(ParseTreeDrawable parseTree)

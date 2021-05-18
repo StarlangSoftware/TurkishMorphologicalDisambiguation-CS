@@ -6,7 +6,7 @@ namespace MorphologicalDisambiguation.AutoProcessor.Sentence
 {
     public class TurkishSentenceAutoDisambiguator : SentenceAutoDisambiguator
     {
-        RootWordStatisticsDisambiguation rootWordStatisticsDisambiguation;
+        LongestRootFirstDisambiguation longestRootFirstDisambiguation;
         
         /**
          * <summary> Constructor for the class.</summary>
@@ -15,9 +15,9 @@ namespace MorphologicalDisambiguation.AutoProcessor.Sentence
          *                           `günü': 2 possible root words `gün' and `günü'
          *                           `çağlar' : 2 possible root words `çağ' and `çağlar'</param>
          */
-        public TurkishSentenceAutoDisambiguator(RootWordStatistics rootWordStatistics) : base(new FsmMorphologicalAnalyzer(), rootWordStatistics)
+        public TurkishSentenceAutoDisambiguator() : base(new FsmMorphologicalAnalyzer())
         {
-            rootWordStatisticsDisambiguation = new RootWordStatisticsDisambiguation();
+            longestRootFirstDisambiguation = new LongestRootFirstDisambiguation();
         }
 
         /**
@@ -28,7 +28,7 @@ namespace MorphologicalDisambiguation.AutoProcessor.Sentence
          *                           `günü': 2 possible root words `gün' and `günü'
          *                           `çağlar' : 2 possible root words `çağ' and `çağlar'</param>
          */
-        public TurkishSentenceAutoDisambiguator(FsmMorphologicalAnalyzer fsm, RootWordStatistics rootWordStatistics) : base(fsm, rootWordStatistics)
+        public TurkishSentenceAutoDisambiguator(FsmMorphologicalAnalyzer fsm) : base(fsm)
         {
         }
         
@@ -55,7 +55,7 @@ namespace MorphologicalDisambiguation.AutoProcessor.Sentence
         protected override void AutoDisambiguateMultipleRootWords(AnnotatedSentence.AnnotatedSentence sentence)
         {
             FsmParseList[] fsmParses = morphologicalAnalyzer.RobustMorphologicalAnalysis(sentence);
-            List<FsmParse> correctParses = rootWordStatisticsDisambiguation.Disambiguate(fsmParses);
+            List<FsmParse> correctParses = longestRootFirstDisambiguation.Disambiguate(fsmParses);
             for (int i = 0; i < sentence.WordCount(); i++){
                 AnnotatedWord word = (AnnotatedWord) sentence.GetWord(i);
                 if (word.GetParse() == null){

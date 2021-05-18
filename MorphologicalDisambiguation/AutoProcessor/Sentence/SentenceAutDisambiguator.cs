@@ -34,11 +34,9 @@ namespace MorphologicalDisambiguation.AutoProcessor.Sentence
          * <param name="rootWordStatistics">The object contains information about the selected correct root words in a corpus for a set
          *                           of possible lemma. Root word statistics can be used to distinguish between possible root words.</param>
          */
-        protected SentenceAutoDisambiguator(FsmMorphologicalAnalyzer morphologicalAnalyzer,
-            RootWordStatistics rootWordStatistics)
+        protected SentenceAutoDisambiguator(FsmMorphologicalAnalyzer morphologicalAnalyzer)
         {
             this.morphologicalAnalyzer = morphologicalAnalyzer;
-            this.rootWordStatistics = rootWordStatistics;
         }
 
         /**

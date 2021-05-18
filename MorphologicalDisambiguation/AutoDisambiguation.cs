@@ -8,7 +8,6 @@ namespace MorphologicalDisambiguation
     public abstract class AutoDisambiguation
     {
         protected FsmMorphologicalAnalyzer morphologicalAnalyzer;
-        protected RootWordStatistics rootWordStatistics;
 
         private static bool IsAnyWordSecondPerson(int index, List<FsmParse> correctParses)
         {
