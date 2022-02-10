@@ -5,13 +5,13 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>NlpToolkit-MorphologicalDisambiguation</PackageId>
         <Authors>olcaytaner</Authors>
-        <PackageVersion>1.0.8</PackageVersion>
+        <PackageVersion>1.0.9</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="NlpToolkit-AnnotatedTree" Version="1.0.6" />
-      <PackageReference Include="NlpToolkit-Classification" Version="1.0.4" />
-      <PackageReference Include="NlpToolkit-NGram" Version="1.0.6" />
+      <PackageReference Include="NlpToolkit-AnnotatedTree" Version="1.0.8" />
+      <PackageReference Include="NlpToolkit-Classification" Version="1.0.6" />
+      <PackageReference Include="NlpToolkit-NGram" Version="1.0.7" />
     </ItemGroup>
 
     <ItemGroup>
