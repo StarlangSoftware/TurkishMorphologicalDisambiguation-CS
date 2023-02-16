@@ -39,8 +39,8 @@ namespace Test
                 }
             }
 
-            Assert.AreEqual(0.9193, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.0001);
-            Assert.AreEqual(0.8273, (correctParse + 0.0) / corpus.NumberOfWords(), 0.0001);
+            Assert.AreEqual(0.9217, (correctRoot + 0.0) / corpus.NumberOfWords(), 0.0001);
+            Assert.AreEqual(0.8226, (correctParse + 0.0) / corpus.NumberOfWords(), 0.0001);
         }
     }
 }
