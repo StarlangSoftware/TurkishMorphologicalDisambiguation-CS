@@ -9,6 +9,14 @@ namespace MorphologicalDisambiguation
     {
         protected FsmMorphologicalAnalyzer morphologicalAnalyzer;
 
+        /// <summary>
+        /// Checks if there is any singular second person agreement or possessor tag before the current word at position
+        /// index.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="correctParses">All correct morphological parses of the previous words.</param>
+        /// <returns>True, if at least one of the morphological parses of the previous words has a singular second person
+        /// agreement or possessor tag, false otherwise.</returns>
         private static bool IsAnyWordSecondPerson(int index, List<FsmParse> correctParses)
         {
             var count = 0;
@@ -24,6 +32,13 @@ namespace MorphologicalDisambiguation
             return count >= 1;
         }
 
+        /// <summary>
+        /// Checks if there is any plural agreement or possessor tag before the current word at position index.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="correctParses">All correct morphological parses of the previous words.</param>
+        /// <returns>True, if at least one of the morphological parses of the previous words has a plural agreement or
+        /// possessor tag, false otherwise.</returns>
         private static bool IsPossessivePlural(int index, List<FsmParse> correctParses)
         {
             for (var i = index - 1; i >= 0; i--)
@@ -37,6 +52,11 @@ namespace MorphologicalDisambiguation
             return false;
         }
 
+        /// <summary>
+        /// Given all possible parses of the next word, this method returns the most frequent pos tag.
+        /// </summary>
+        /// <param name="nextParseList">All possible parses of the next word.</param>
+        /// <returns>Most frequent pos tag in all possible parses of the next word.</returns>
         private static string NextWordPos(FsmParseList nextParseList)
         {
             var map = new CounterHashMap<string>();
@@ -48,26 +68,58 @@ namespace MorphologicalDisambiguation
             return map.Max();
         }
 
+        /// <summary>
+        /// Checks if the current word is just before the last word.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <returns>True, if the current word is just before the last word, false otherwise.</returns>
         private static bool IsBeforeLastWord(int index, FsmParseList[] fsmParses)
         {
             return index + 2 == fsmParses.Length;
         }
 
+        /// <summary>
+        /// Checks if there is at least one word after the current word.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <returns>True, if there is at least one word after the current word, false otherwise.</returns>
         private static bool NextWordExists(int index, FsmParseList[] fsmParses)
         {
             return index + 1 < fsmParses.Length;
         }
 
+        /// <summary>
+        /// Checks if there is at least one word after the current word and that next word is a noun.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <returns>True, if there is at least one word after the current word and that next word is a noun, false otherwise.</returns>
         private static bool IsNextWordNoun(int index, FsmParseList[] fsmParses)
         {
             return index + 1 < fsmParses.Length && NextWordPos(fsmParses[index + 1]).Equals("NOUN");
         }
 
+        /// <summary>
+        /// Checks if there is at least one word after the current word and that next word is a number.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <returns>True, if there is at least one word after the current word and that next word is a number, false
+        /// otherwise.</returns>
         private static bool IsNextWordNum(int index, FsmParseList[] fsmParses)
         {
             return index + 1 < fsmParses.Length && NextWordPos(fsmParses[index + 1]).Equals("NUM");
         }
 
+        /// <summary>
+        /// Checks if there is at least one word after the current word and that next word is a noun or adjective.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <returns>True, if there is at least one word after the current word and that next word is a noun or adjective,
+        /// false otherwise.</returns>
         private static bool IsNextWordNounOrAdjective(int index, FsmParseList[] fsmParses)
         {
             return index + 1 < fsmParses.Length && (NextWordPos(fsmParses[index + 1]).Equals("NOUN") ||
@@ -75,11 +127,22 @@ namespace MorphologicalDisambiguation
                                                     NextWordPos(fsmParses[index + 1]).Equals("DET"));
         }
 
+        /// <summary>
+        /// Checks if the current word is the first word of the sentence or not.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <returns>True, if the current word is the first word of the sentence, false otherwise.</returns>
         private static bool IsFirstWord(int index)
         {
             return index == 0;
         }
 
+        /// <summary>
+        /// Checks if there are at least two occurrences of 'ne', 'ya' or 'gerek' in the sentence.
+        /// </summary>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <param name="word">'ne', 'ya' or 'gerek'</param>
+        /// <returns>True, if there are at least two occurrences of 'ne', 'ya' or 'gerek' in the sentence, false otherwise.</returns>
         private static bool ContainsTwoNeOrYa(FsmParseList[] fsmParses, string word)
         {
             var count = 0;
@@ -95,11 +158,30 @@ namespace MorphologicalDisambiguation
             return count == 2;
         }
 
+        /// <summary>
+        /// Checks if there is at least one word before the given word and its pos tag is the given pos tag.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="correctParses">All correct morphological parses of the previous words.</param>
+        /// <param name="tag">Pos tag of the previous word</param>
+        /// <returns>True, if there is at least one word before the given word and its pos tag is the given pos tag, false
+        /// otherwise.</returns>
         private static bool HasPreviousWordTag(int index, List<FsmParse> correctParses, MorphologicalTag tag)
         {
             return index > 0 && correctParses[index - 1].ContainsTag(tag);
         }
 
+        /// <summary>
+        /// Given the disambiguation parse string, position of the current word in the sentence, all morphological parses of
+        /// all words in the sentence and all correct morphological parses of the previous words, the algorithm determines
+        /// the correct morphological parse of the current word in rule based manner.
+        /// </summary>
+        /// <param name="parseString">Disambiguation parse string. The string contains distinct subparses for the given word for a
+        ///                    determined root word. The subparses are separated with '$'.</param>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <param name="correctParses">All correct morphological parses of the previous words.</param>
+        /// <returns>Correct morphological subparse of the current word.</returns>
         private static string SelectCaseForParseString(string parseString, int index, FsmParseList[] fsmParses,
             List<FsmParse> correctParses)
         {
@@ -1140,6 +1222,15 @@ namespace MorphologicalDisambiguation
             return null;
         }
 
+        /// <summary>
+        /// Given the position of the current word in the sentence, all morphological parses of all words in the sentence and
+        /// all correct morphological parses of the previous words, the algorithm determines the correct morphological parse
+        /// of the current word in rule based manner.
+        /// </summary>
+        /// <param name="index">Position of the current word.</param>
+        /// <param name="fsmParses">All morphological parses of the current sentence.</param>
+        /// <param name="correctParses">All correct morphological parses of the previous words.</param>
+        /// <returns>Correct morphological parse of the current word.</returns>
         public static FsmParse CaseDisambiguator(int index, FsmParseList[] fsmParses, List<FsmParse> correctParses)
         {
             var fsmParseList = fsmParses[index];

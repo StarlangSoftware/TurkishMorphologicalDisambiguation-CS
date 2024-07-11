@@ -9,16 +9,29 @@ namespace MorphologicalDisambiguation
 
         private Dictionary<string, string> rootList;
 
+        /// <summary>
+        /// Constructor for the longest root first disambiguation algorithm. The method reads a list of (surface form, most
+        /// frequent root word for that surface form) pairs from 'rootlist.txt' file.
+        /// </summary>
         public LongestRootFirstDisambiguation()
         {
             ReadFromFile("rootlist.txt");
         }
 
+        /// <summary>
+        /// Constructor for the longest root first disambiguation algorithm. The method reads a list of (surface form, most
+        /// frequent root word for that surface form) pairs from a given file.
+        /// </summary>
+        /// <param name="fileName">File that contains list of (surface form, most frequent root word for that surface form) pairs.</param>
         public LongestRootFirstDisambiguation(string fileName)
         {
             ReadFromFile(fileName);
         }
 
+        /// <summary>
+        /// Reads the list of (surface form, most frequent root word for that surface form) pairs from a given file.
+        /// </summary>
+        /// <param name="fileName">Input file stream.</param>
         private void ReadFromFile(string fileName)
         {
             rootList = new Dictionary<string, string>();
